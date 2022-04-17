@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {FC, useEffect, useState} from 'react'
+import {Navigate, useRoutes} from "react-router-dom"
+import Layout from "components/layout/Layout"
+import {RouteNames} from "types/routes"
+import LoginPage from "components/pages/LoginPage"
+import RegisterPage from 'components/pages/RegisterPage'
+import HomePage from "components/pages/HomePage"
+import ProfilePage from "./components/pages/ProfilePage"
+import {useActions} from "./hooks/redux"
+import {auth} from "./firebaseConfig"
+import {onAuthStateChanged} from "firebase/auth"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App: FC = () => {
+    const [isLoaded, setLoaded] = useState<boolean>(false)
+    const {authCurrentUser} = useActions()
+    useEffect(() => {
+        if (isLoaded) {
+            authCurrentUser()
+        }
+    }, [isLoaded])
+    useEffect(() => {
+        onAuthStateChanged(auth, () => {
+            setLoaded(true)
+        })
+    }, [])
+    const routes = useRoutes([
+        {
+            path: RouteNames.ROOT,
+            element: <Layout/>,
+            children: [
+                {
+                    path: RouteNames.LOGIN,
+                    element: <LoginPage/>,
+                },
+                {
+                    path: RouteNames.REGISTER,
+                    element: <RegisterPage/>,
+                },
+                {
+                    path: RouteNames.ROOT,
+                    element: <HomePage/>
+                },
+                {
+                    path: RouteNames.PROFILE,
+                    element: <ProfilePage/>
+                },
+                {
+                    path: '*',
+                    element: <Navigate to={RouteNames.ROOT}/>
+                },
+            ]
+        }
+    ])
+
+    return (
+        <>
+            {routes}
+        </>
+    )
 }
 
-export default App;
+export default App
