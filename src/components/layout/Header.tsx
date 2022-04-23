@@ -17,8 +17,7 @@ const Header = () => {
     return (
         <AppBar sx={{height: 70}}>
             <Container sx={{height: '100%', display: 'flex', alignItems: 'center'}}>
-                <Typography variant="h4" component="div" sx={{flexGrow: 1}}>Eng</Typography>
-                <Stack flexDirection="row" alignItems="center" columnGap={1}>
+                <Stack flexDirection="row" alignItems="center" columnGap={1} sx={{marginLeft: "auto",}}>
                     {!isLoading && <AnimateSharedLayout>
                         {
                             user

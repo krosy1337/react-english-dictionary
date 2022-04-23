@@ -4,6 +4,7 @@ import {IDictionary, IFinallyDictionary, IWord} from "types/dictionary"
 import {getRandomInt, shuffle} from "utils"
 import Result from "./Result"
 import {useAppSelector} from "hooks/redux"
+import CustomWord from "./UI/CustomWord"
 
 // const wordsDictionary: IDictionary = [
 //     [{language: "English", text: ["Instead"]}, {language: "Русский", text: ["Вместо"]}],
@@ -100,6 +101,7 @@ const WordsList = () => {
         }
         setAnswer('')
         setSnackVisible(true)
+        setCurrentWord(null)
         if (currentWordIndex === shuffledDictionary.length - 1) {
             setCurrentWordIndex(-1)
             setFinished(true)
@@ -123,11 +125,9 @@ const WordsList = () => {
                             borderRadius: 2,
                             padding: 4,
                             minHeight: 150,
-                            display: "flex"
+                            position: "relative"
                         }}>
-                            <Typography variant="h3" component="div"
-                                        textAlign="center"
-                                        sx={{fontSize: "2rem", margin: "auto",}}>{currentWord?.text[0]}</Typography>
+                            <CustomWord id={currentWordIndex} text={currentWord?.text[0]}/>
                         </Box>
                         <Box component="form" sx={{backgroundColor: "#fff", borderRadius: 2, padding: 4,}}
                              onSubmit={(e: FormEvent<HTMLFormElement>) => {
