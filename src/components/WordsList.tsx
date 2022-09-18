@@ -6,31 +6,6 @@ import Result from "./Result"
 import {useAppSelector} from "hooks/redux"
 import CustomWord from "./UI/CustomWord"
 
-// const wordsDictionary: IDictionary = [
-//     [{language: "English", text: ["Instead"]}, {language: "Русский", text: ["Вместо"]}],
-//     [{language: "English", text: ["Often"]}, {language: "Русский", text: ["Часто"]}],
-//     [{language: "English", text: ["Hurry"]}, {language: "Русский", text: ["Торопиться", "Спешить"]}],
-//     [{language: "English", text: ["Sure"]}, {language: "Русский", text: ["Конечно"]}],
-//     [{language: "English", text: ["Straight"]}, {language: "Русский", text: ["Прямой"]}],
-//     [{language: "English", text: ["Implement"]}, {language: "Русский", text: ["Осуществлять"]}],
-//     [{language: "English", text: ["Suppose"]}, {language: "Русский", text: ["Предполагать"]}],
-//     [{language: "English", text: ["Purchase"]}, {language: "Русский", text: ["Покупка"]}],
-//     [{language: "English", text: ["Weak"]}, {language: "Русский", text: ["Слабый"]}],
-//     [{language: "English", text: ["Internal"]}, {language: "Русский", text: ["Внутренний"]}],
-//     [{language: "English", text: ["Wardrobe"]}, {language: "Русский", text: ["Шкаф для одежды"]}],
-//     [{language: "English", text: ["Decision"]}, {language: "Русский", text: ["Решение"]}],
-//     [{language: "English", text: ["Ought"]}, {language: "Русский", text: ["Должен"]}],
-//     [{language: "English", text: ["Through"]}, {language: "Русский", text: ["Через"]}],
-//     [{language: "English", text: ["Luggage"]}, {language: "Русский", text: ["Багаж"]}],
-//     [{language: "English", text: ["Probably"]}, {language: "Русский", text: ["Возможно"]}],
-//     [{language: "English", text: ["Customs"]}, {language: "Русский", text: ["Таможня"]}],
-//     [{language: "English", text: ["Rather"]}, {language: "Русский", text: ["Точнее"]}],
-//     [{language: "English", text: ["Treatment"]}, {language: "Русский", text: ["Лечение"]}],
-//     [{language: "English", text: ["Essential"]}, {language: "Русский", text: ["Существенный"]}],
-//     [{language: "English", text: ["Dice"]}, {language: "Русский", text: ["Кости", "Игральные кости"]}],
-//     [{language: "English", text: ["Scaffold"]}, {language: "Русский", text: ["Леса", "Строительные леса"]}],
-// ]
-
 const WordsList = () => {
     const {dictionary} = useAppSelector(state => state.user)
     const [currentWordIndex, setCurrentWordIndex] = useState<number>(-1)
@@ -73,7 +48,7 @@ const WordsList = () => {
             return
         }
         const lowerCurrentTranslate = {...currentTranslate, text: currentTranslate.text.map(w => w.toLowerCase())}
-        if (lowerCurrentTranslate.text.includes(answer.toLowerCase())) {
+        if (lowerCurrentTranslate.text.includes(answer.toLowerCase().trim())) {
             if (!dictionary) {
                 return
             }
@@ -151,11 +126,10 @@ const WordsList = () => {
                                             onClick={startHandler}>Start</Button>
                                 </>
                                 :
-                                <Typography variant="h1" fontSize="3rem" align="center">Ваш словарь пуст</Typography>
+                                <Typography variant="h1" align="center" sx={{fontSize: {xs: "1.5rem", sm: "3rem",}}}>
+                                    Your dictionary is empty</Typography>
                         }
                     </>
-
-
             }
             <Snackbar open={isSnackVisible} autoHideDuration={1000} onClose={() => setSnackVisible(false)}
                       anchorOrigin={{

@@ -7,7 +7,7 @@ const Layout = () => {
     return (
         <>
             <Header />
-            <Container sx={{paddingTop: 12}}>
+            <Container sx={{paddingTop: {xs: 10, md: 12}}}>
                 <Outlet />
             </Container>
         </>

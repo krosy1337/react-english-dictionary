@@ -94,7 +94,8 @@ const ProfileDictionary: FC<ProfileDictionaryProps> = ({setSelectedRows}) => {
                                   },
                               }}/>
                     :
-                    <Typography variant="h1" fontSize="3rem" align="center">Ваш словарь пуст</Typography>
+                    <Typography variant="h1" align="center" sx={{fontSize: {xs: "1.5rem", sm: "3rem",}}}>
+                        Your dictionary is empty</Typography>
             }
 
         </Box>

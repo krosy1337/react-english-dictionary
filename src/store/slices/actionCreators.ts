@@ -71,10 +71,10 @@ export const addWord = createAsyncThunk(
             const dictionary = snapshot.val()
             let newDictionary: IDictionary
             if (dictionary) {
-                newDictionary = [...dictionary, {id: uuidv4(), words: [{text: [word]}, {text: [translate]}]
+                newDictionary = [...dictionary, {id: uuidv4(), words: [{text: [word.trim()]}, {text: [translate.trim()]}]
             }]
             } else {
-                newDictionary = [{id: uuidv4(), words: [{text: [word]}, {text: [translate]}]}]
+                newDictionary = [{id: uuidv4(), words: [{text: [word.trim()]}, {text: [translate.trim()]}]}]
             }
             await set(ref(database, `dictionaries/${user?.uid}`), newDictionary)
             return newDictionary

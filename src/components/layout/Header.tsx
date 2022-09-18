@@ -29,7 +29,8 @@ const Header = () => {
                                     <CustomLink to={RouteNames.PROFILE}
                                                 isActive={pathname === `${RouteNames.PROFILE}`}>
                                         <Typography
-                                            sx={{maxWidth: 80, overflow: "hidden", textOverflow: "ellipsis",}} lineHeight="inherit">{user.displayName}</Typography>
+                                            sx={{maxWidth: 80, overflow: "hidden", textOverflow: "ellipsis",}}
+                                            lineHeight="inherit">Dictionary</Typography>
                                     </CustomLink>
                                 </>
                                 :

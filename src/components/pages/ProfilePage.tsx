@@ -51,9 +51,9 @@ const ProfilePage: FC = () => {
                     ?
                     <>
                         <Stack direction="row">
-                            <Button sx={{fontSize: "1rem", marginTop: 2,}} onClick={() => setModalOpen(true)}>Add new
+                            <Button sx={{fontSize: {xs: "0.75rem", sm: "1rem"}}} onClick={() => setModalOpen(true)}>Add new
                                 word</Button>
-                            <Button sx={{fontSize: "1rem", marginTop: 2,}} disabled={!selectedRows}
+                            <Button sx={{fontSize: {xs: "0.75rem", sm: "1rem"}}} disabled={!selectedRows}
                                     onClick={onDeleteWord}>Delete word{(selectedRows?.length || 0)  > 1 && 's'}</Button>
                         </Stack>
                         <ProfileDictionary setSelectedRows={setSelectedRows}/>
